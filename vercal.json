@@ -1,21 +1,23 @@
 {
     "version": 2,
-    "framework": null,
-    "buildCommand": "vite build",
-    "outputDirectory": "public",
-    "functions": {
-        "api/index.php": {
-            "runtime": "vercel-php@0.7.5"
+    "builds": [
+        {
+            "src": "api/index.php",
+            "use": "vercel-php@0.7.5"
+        },
+        {
+            "src": "public/**",
+            "use": "@vercel/static"
         }
-    },
+    ],
     "routes": [
         {
             "src": "/build/(.*)",
-            "dest": "/public/build/$1"
+            "dest": "public/build/$1"
         },
         {
             "src": "/(css|js|images|favicon.ico|robots.txt)(.*)",
-            "dest": "/public/$1$2"
+            "dest": "public/$1$2"
         },
         {
             "src": "/(.*)",
